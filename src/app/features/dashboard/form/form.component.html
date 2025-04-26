@@ -1,1 +1,57 @@
-<p>form works!</p>
+<mat-card appearance="outlined">
+  <mat-card-header>Add expense</mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+      <!-- ? Description -->
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+        @if (expenseForm.get('title')?.invalid && expenseForm.get('title')?.touched) {
+          <mat-error>Title is required</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- ? Amount & Category -->
+      <div class="amount-category">
+        <mat-form-field class="amount-field" appearance="fill">
+          <mat-label>Amount</mat-label>
+          <input matInput formControlName="amount" />
+          @if (expenseForm.get('amount')?.hasError('required') && expenseForm.get('amount')?.touched) {
+            <mat-error> Amount is required </mat-error>
+          }
+          @if (expenseForm.get('amount')?.hasError('min') && expenseForm.get('amount')?.touched) {
+            <mat-error> Amount too small </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="category-field" appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            @for(category of categories; track category.value) {
+              <mat-option [value]="category.value">{{ category.viewValue }}</mat-option>
+            }
+          </mat-select>
+          @if (expenseForm.get('title')?.invalid && expenseForm.get('category')?.touched) {
+            <mat-error> Category is required </mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- ? Datepicker -->
+      <!-- <mat-form-field class="datepicker-field" appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        @if (expenseForm.get('date')?.hasError('min') && expenseForm.get('date')?.touched) {
+            <mat-error> Date is required </mat-error>
+        }
+      </mat-form-field> -->
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit">Add Expense</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

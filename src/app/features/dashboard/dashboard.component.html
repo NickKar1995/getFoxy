@@ -1,1 +1,6 @@
 <p>dashboard works!</p>
+<app-form></app-form>
+
+@for(expense of expenses$ | async; track expense.id) {
+  <app-expense [expense]="expense"></app-expense>
+}
