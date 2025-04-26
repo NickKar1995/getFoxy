@@ -1,6 +1,7 @@
-<p>dashboard works!</p>
+<app-amounts [todayTotal$]="todayTotal$" [monthlyTotal$]="monthlyTotal$"></app-amounts>
 <app-form></app-form>
-
-@for(expense of expenses$ | async; track expense.id) {
-  <app-expense [expense]="expense"></app-expense>
-}
+<section id="expenses-section">
+  @for (expense of expenses$ | async; track expense.id) {
+    <app-expense (delete)="onDeleteExpense($event)" [expense]="expense"></app-expense>
+  }
+</section>

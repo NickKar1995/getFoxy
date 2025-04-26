@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Expense } from '../../../models/Expense';
 import { StorageEnum } from '../../../models/StorageEnum';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,46 @@ export class ExpenseService {
     this.expenses.push(newExpense);
     this.expensesSubject.next(this.expenses);
     this.saveToLocalStorage();
+  }
+
+  deleteExpense(id: string): void {
+    this.expenses = this.expenses.filter((expense) => expense.id !== id);
+    this.expensesSubject.next(this.expenses);
+    this.saveToLocalStorage();
+  }
+
+  getTodayTotal$(): Observable<number> {
+    return this.expenses$.pipe(
+      map((expenses) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        return expenses
+          .filter((expense) => {
+            const expenseDate = new Date(expense.date);
+            expenseDate.setHours(0, 0, 0, 0);
+            return expenseDate.getTime() === today.getTime();
+          })
+          .reduce((sum, expense) => sum + Number(expense.amount), 0);
+      }),
+    );
+  }
+
+  getMonthlyTotal$(): Observable<number> {
+    return this.expenses$.pipe(
+      map((expenses) => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth();
+
+        return expenses
+          .filter((expense) => {
+            const expenseDate = new Date(expense.date);
+            return expenseDate.getFullYear() === year && expenseDate.getMonth() === month;
+          })
+          .reduce((sum, expense) => sum + Number(expense.amount), 0);
+      }),
+    );
   }
 
   private saveToLocalStorage(): void {

@@ -1,0 +1,15 @@
+<section class="summary-cards">
+  <mat-card appearance="outlined" class="summary-card">
+    <mat-card-content>
+      <div class="summary-title">Today's Total</div>
+      <div class="summary-amount">{{ todayTotal$ | async | currency }}</div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined" class="summary-card">
+    <mat-card-content>
+      <div class="summary-title">Monthly Total</div>
+      <div class="summary-amount">{{ monthlyTotal$ | async | currency }}</div>
+    </mat-card-content>
+  </mat-card>
+</section>
