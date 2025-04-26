@@ -3,7 +3,7 @@ import { FormComponent } from './form/form.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { ExpenseService } from './form/services/expense/expense.service';
 import { AsyncPipe } from '@angular/common';
-import { AmountsComponent } from "../../shared/components/amounts/amounts/amounts.component";
+import { AmountsComponent } from '../../shared/components/amounts/amounts.component';
 
 @Component({
   selector: 'app-dashboard',
