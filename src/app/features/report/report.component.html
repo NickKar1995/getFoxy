@@ -19,7 +19,6 @@
   </mat-select>
 </mat-form-field>
 
-
 <!-- Report Summary -->
 <div class="report-summary">
   <h3>
@@ -46,6 +45,7 @@
         <div class="expense-category">{{ expense.category }}</div>
         <div class="expense-amount">{{ expense.amount | currency }}</div>
       </div>
+      
     }
   } @else {
     <div class="no-expenses">
@@ -53,3 +53,9 @@
     </div>
   }
 </div>
+
+<!-- ? Chart-Area -->
+
+<section>
+  <app-chart [top5ExpensesChartData$]="top5ExpensesChartData$"></app-chart>
+</section>

@@ -7,11 +7,22 @@ import { Expense } from '../dashboard/models/Expense';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { AsyncPipe, CurrencyPipe, DatePipe } from '@angular/common';
 import { DayOption } from './models/DayOption';
+import { ChartComponent } from './chart/chart.component';
+import { ChartData } from 'chart.js';
 
 @Component({
   selector: 'app-report',
   standalone: true,
-  imports: [MatFormField, MatLabel, MatSelect, MatOption, AsyncPipe, CurrencyPipe, DatePipe],
+  imports: [
+    ChartComponent,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    AsyncPipe,
+    CurrencyPipe,
+    DatePipe,
+  ],
   templateUrl: './report.component.html',
   styleUrl: './report.component.scss',
 })
@@ -22,6 +33,7 @@ export class ReportComponent implements OnInit {
   selectedDay = 0;
 
   monthlyExpenses$!: Observable<Expense[]>;
+  top5ExpensesChartData$!: Observable<ChartData<'bar', number[], string> | null>;
   availableDays$!: Observable<DayOption[]>;
   filteredExpenses$!: Observable<Expense[]>;
   totalAmount$!: Observable<number>;
@@ -40,6 +52,7 @@ export class ReportComponent implements OnInit {
     this.getAvailableDaysObservable();
     this.getFilteredExpensesObservable();
     this.getTotalAmountObservable();
+    this.getTop5ExpensesChartData();
   }
 
   getMonthlyExpensesObservable(): void {
@@ -51,6 +64,29 @@ export class ReportComponent implements OnInit {
           return expenseDate.getMonth() === month && expenseDate.getFullYear() === this.currentYear;
         }),
       ),
+    );
+  }
+
+  getTop5ExpensesChartData(): void {
+    this.top5ExpensesChartData$ = this.monthlyExpenses$.pipe(
+      map((expenses) => {
+        if (!expenses.length) {
+          return null;
+        }
+        const top5Expenses = [...expenses].sort((a, b) => b.amount - a.amount).slice(0, 5);
+        const labels = top5Expenses.map((expense) => expense.title);
+        const data = top5Expenses.map((expense) => expense.amount);
+        return {
+          labels,
+          datasets: [
+            {
+              label: 'Top 5 Expenses',
+              data,
+              backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+            },
+          ],
+        } as ChartData<'bar', number[], string>;
+      }),
     );
   }
 
