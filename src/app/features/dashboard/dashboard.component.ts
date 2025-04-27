@@ -12,23 +12,13 @@ import { AmountsComponent } from '../../shared/components/amounts/amounts.compon
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   private readonly expenseService = inject(ExpenseService);
   expenses$ = this.expenseService.expenses$;
   todayTotal$ = this.expenseService.getTodayTotal$();
   monthlyTotal$ = this.expenseService.getMonthlyTotal$();
 
-  ngOnInit(): void {
-    // this.updateTotals();
-  }
-
   onDeleteExpense($event: string) {
-    console.log($event);
     this.expenseService.deleteExpense($event);
   }
-
-  // private updateTotals(): void {
-  //   this.todayTotal = this.expenseService.getTodayTotal();
-  //   this.monthlyTotal = this.expenseService.getMonthlyTotal();
-  // }
 }

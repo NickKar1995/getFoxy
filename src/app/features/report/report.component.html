@@ -1,0 +1,55 @@
+<h4>Basic mat-select with initial value</h4>
+
+<mat-form-field>
+  <mat-label>Select month to report</mat-label>
+  <mat-select [(value)]="selectedMonth" (valueChange)="onMonthChange($event)">
+    @for (month of months; track month) {
+      <mat-option [value]="month.value">{{ month.viewValue }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-label>Select day</mat-label>
+  <mat-select [(value)]="selectedDay" (valueChange)="onDayChange($event)">
+    <mat-option [value]="0">All Days</mat-option>
+    @for (day of availableDays$ | async; track day) {
+      <mat-option [value]="day.value">{{ day.viewValue }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+
+<!-- Report Summary -->
+<div class="report-summary">
+  <h3>
+    @if (selectedDay === 0) {
+      {{ getSelectedMonthName() }} {{ currentYear }}
+    } @else {
+      {{ selectedDay }} {{ getSelectedMonthName() }} {{ currentYear }}
+    }
+  </h3>
+
+  <div class="total-section">
+    <div class="total-amount">{{ totalAmount$ | async | currency }}</div>
+    <div class="expense-count">{{ (filteredExpenses$ | async)?.length || 0 }} expense(s)</div>
+  </div>
+</div>
+
+<!-- Expenses List -->
+<div class="expenses-list">
+  @if ((filteredExpenses$ | async)?.length) {
+    @for (expense of filteredExpenses$ | async; track expense.id) {
+      <div class="expense-item">
+        <div class="expense-date">{{ expense.date | date: 'd MMM' }}</div>
+        <div class="expense-description">{{ expense.title }}</div>
+        <div class="expense-category">{{ expense.category }}</div>
+        <div class="expense-amount">{{ expense.amount | currency }}</div>
+      </div>
+    }
+  } @else {
+    <div class="no-expenses">
+      <p>No expenses found for the selected period</p>
+    </div>
+  }
+</div>
