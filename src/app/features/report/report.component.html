@@ -1,25 +1,25 @@
-<h4>Basic mat-select with initial value</h4>
+<h4>Monthly/Daily Report</h4>
 
-<mat-form-field>
-  <mat-label>Select month to report</mat-label>
-  <mat-select [(value)]="selectedMonth" (valueChange)="onMonthChange($event)">
-    @for (month of months; track month) {
-      <mat-option [value]="month.value">{{ month.viewValue }}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>
+<section id="filter-section">
+  <mat-form-field>
+    <mat-label>Select month to report</mat-label>
+    <mat-select [(value)]="selectedMonth" (valueChange)="onMonthChange($event)">
+      @for (month of months; track month) {
+        <mat-option [value]="month.value">{{ month.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Select day</mat-label>
-  <mat-select [(value)]="selectedDay" (valueChange)="onDayChange($event)">
-    <mat-option [value]="0">All Days</mat-option>
-    @for (day of availableDays$ | async; track day) {
-      <mat-option [value]="day.value">{{ day.viewValue }}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>
-
-<!-- Report Summary -->
+  <mat-form-field>
+    <mat-label>Select day</mat-label>
+    <mat-select [(value)]="selectedDay" (valueChange)="onDayChange($event)">
+      <mat-option [value]="0">All Days</mat-option>
+      @for (day of availableDays$ | async; track day) {
+        <mat-option [value]="day.value">{{ day.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</section>
 <div class="report-summary">
   <h3>
     @if (selectedDay === 0) {
@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<div class="expenses-list">
+<section id="expenses-list">
   @if ((filteredExpenses$ | async)?.length) {
     @for (expense of filteredExpenses$ | async; track expense.id) {
       <app-expense [shouldShowButton]="false" [expense]="expense"></app-expense>
@@ -47,8 +47,8 @@
       <p>No expenses found for the selected period</p>
     </div>
   }
-</div>
+</section>
 
-<section>
+<section id="charts-section">
   <app-chart [top5ExpensesChartData$]="top5ExpensesChartData$"></app-chart>
 </section>

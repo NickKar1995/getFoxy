@@ -1,0 +1,26 @@
+#filter-section {
+  display: flex;
+  flex-direction: column;
+}
+h3 {
+  text-align: center;
+}
+@media only screen and (min-width: 768px) {
+  h4 {
+    text-align: center;
+  }
+  #filter-section {
+    display: flex;
+    flex-direction: unset;
+    justify-content: space-evenly;
+  }
+  #expenses-list {
+    width: 70%;
+    margin: 0 auto;
+  }
+  //   #chart-section {
+  //     margin: 0 auto;
+  //   }
+
+  // !Leave this as it is for since the bar chart has a responsive boolean, who knows
+}
