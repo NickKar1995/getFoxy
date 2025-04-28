@@ -1,0 +1,10 @@
+#summary-cards {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+
+  .summary-title,
+  .summary-amount {
+    text-align: center;
+  }
+}

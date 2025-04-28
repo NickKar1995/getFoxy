@@ -7,9 +7,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
-import { ExpenseService } from './services/expense/expense.service';
 import { EXPENSE_CATEGORIES } from '../models/Categories';
-
+import { ExpenseService } from '../../../core/services/expense/expense.service';
 @Component({
   selector: 'app-form',
   standalone: true,

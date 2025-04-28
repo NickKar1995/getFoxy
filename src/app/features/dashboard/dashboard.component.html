@@ -1,7 +1,7 @@
 <app-amounts [todayTotal$]="todayTotal$" [monthlyTotal$]="monthlyTotal$"></app-amounts>
 <app-form></app-form>
 <section id="expenses-section">
-  @for (expense of expenses$ | async; track expense.id) {
+  @for (expense of todayExpenses$ | async; track expense.id) {
     <app-expense (delete)="onDeleteExpense($event)" [expense]="expense"></app-expense>
   }
 </section>

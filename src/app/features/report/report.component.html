@@ -39,13 +39,7 @@
 <div class="expenses-list">
   @if ((filteredExpenses$ | async)?.length) {
     @for (expense of filteredExpenses$ | async; track expense.id) {
-      <div class="expense-item">
-        <div class="expense-date">{{ expense.date | date: 'd MMM' }}</div>
-        <div class="expense-description">{{ expense.title }}</div>
-        <div class="expense-category">{{ expense.category }}</div>
-        <div class="expense-amount">{{ expense.amount | currency }}</div>
-      </div>
-      
+      <app-expense [shouldShowButton]="false" [expense]="expense"></app-expense>
     }
   } @else {
     <div class="no-expenses">

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Expense } from '../../../models/Expense';
-import { StorageEnum } from '../../../models/StorageEnum';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { map, Observable } from 'rxjs';
+import { Expense } from '../../../features/dashboard/models/Expense';
+import { StorageEnum } from '../../../features/dashboard/models/StorageEnum';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +50,21 @@ export class ExpenseService {
     );
   }
 
+  getTodayExpenses$(): Observable<Expense[]> {
+    return this.expenses$.pipe(
+      map((expenses) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        return expenses.filter((expense) => {
+          const expenseDate = new Date(expense.date);
+          expenseDate.setHours(0, 0, 0, 0);
+          return expenseDate.getTime() === today.getTime();
+        });
+      }),
+    );
+  }
+  
   getMonthlyTotal$(): Observable<number> {
     return this.expenses$.pipe(
       map((expenses) => {

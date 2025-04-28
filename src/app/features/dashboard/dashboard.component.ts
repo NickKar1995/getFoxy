@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormComponent } from './form/form.component';
-import { ExpenseComponent } from './expense/expense.component';
-import { ExpenseService } from './form/services/expense/expense.service';
+import { ExpenseComponent } from '../../shared/components/expense/expense.component';
 import { AsyncPipe } from '@angular/common';
 import { AmountsComponent } from '../../shared/components/amounts/amounts.component';
+import { ExpenseService } from '../../core/services/expense/expense.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +14,7 @@ import { AmountsComponent } from '../../shared/components/amounts/amounts.compon
 })
 export class DashboardComponent {
   private readonly expenseService = inject(ExpenseService);
-  expenses$ = this.expenseService.expenses$;
+  todayExpenses$ = this.expenseService.getTodayExpenses$();
   todayTotal$ = this.expenseService.getTodayTotal$();
   monthlyTotal$ = this.expenseService.getMonthlyTotal$();
 

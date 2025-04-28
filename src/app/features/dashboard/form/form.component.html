@@ -1,7 +1,7 @@
 <mat-card appearance="outlined">
-  <mat-card-header>Add expense</mat-card-header>
+  <mat-card-header><strong>Add expense</strong></mat-card-header>
   <mat-card-content>
-    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" id="expense-form">
       <!-- ? Description -->
       <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
@@ -12,30 +12,32 @@
       </mat-form-field>
 
       <!-- ? Amount & Category -->
-      <div class="amount-category">
-        <mat-form-field class="amount-field" appearance="fill">
-          <mat-label>Amount</mat-label>
-          <input matInput formControlName="amount" />
-          @if (expenseForm.get('amount')?.hasError('required') && expenseForm.get('amount')?.touched) {
-            <mat-error> Amount is required </mat-error>
-          }
-          @if (expenseForm.get('amount')?.hasError('min') && expenseForm.get('amount')?.touched) {
-            <mat-error> Amount too small </mat-error>
-          }
-        </mat-form-field>
+      <!-- <div class="amount-category"> -->
+      <mat-form-field class="amount-field" appearance="fill">
+        <mat-label>Amount</mat-label>
+        <input matInput formControlName="amount" />
+        @if (
+          expenseForm.get('amount')?.hasError('required') && expenseForm.get('amount')?.touched
+        ) {
+          <mat-error> Amount is required </mat-error>
+        }
+        @if (expenseForm.get('amount')?.hasError('min') && expenseForm.get('amount')?.touched) {
+          <mat-error> Amount too small </mat-error>
+        }
+      </mat-form-field>
 
-        <mat-form-field class="category-field" appearance="fill">
-          <mat-label>Category</mat-label>
-          <mat-select formControlName="category">
-            @for(category of categories; track category.value) {
-              <mat-option [value]="category.value">{{ category.viewValue }}</mat-option>
-            }
-          </mat-select>
-          @if (expenseForm.get('title')?.invalid && expenseForm.get('category')?.touched) {
-            <mat-error> Category is required </mat-error>
+      <mat-form-field class="category-field" appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          @for (category of categories; track category.value) {
+            <mat-option [value]="category.value">{{ category.viewValue }}</mat-option>
           }
-        </mat-form-field>
-      </div>
+        </mat-select>
+        @if (expenseForm.get('title')?.invalid && expenseForm.get('category')?.touched) {
+          <mat-error> Category is required </mat-error>
+        }
+      </mat-form-field>
+      <!-- </div> -->
 
       <!-- ? Datepicker -->
       <!-- <mat-form-field class="datepicker-field" appearance="fill">

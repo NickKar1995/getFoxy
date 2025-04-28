@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Expense } from '../models/Expense';
+import { Expense } from '../../../features/dashboard/models/Expense';
 import { CurrencyPipe, DatePipe, NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ExpenseComponent {
   @Input() expense!: Expense;
+  @Input() shouldShowButton = true
   @Output() delete = new EventEmitter<string>();
 
   // Category colors map

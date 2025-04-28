@@ -2,13 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MONTHS_EN } from './models/Months';
-import { ExpenseService } from '../dashboard/form/services/expense/expense.service';
 import { Expense } from '../dashboard/models/Expense';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
-import { AsyncPipe, CurrencyPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { DayOption } from './models/DayOption';
 import { ChartComponent } from './chart/chart.component';
 import { ChartData } from 'chart.js';
+import { ExpenseComponent } from '../../shared/components/expense/expense.component';
+import { ExpenseService } from '../../core/services/expense/expense.service';
 
 @Component({
   selector: 'app-report',
@@ -21,7 +22,8 @@ import { ChartData } from 'chart.js';
     MatOption,
     AsyncPipe,
     CurrencyPipe,
-    DatePipe,
+
+    ExpenseComponent,
   ],
   templateUrl: './report.component.html',
   styleUrl: './report.component.scss',
@@ -59,7 +61,6 @@ export class ReportComponent implements OnInit {
     this.monthlyExpenses$ = combineLatest([this.expensesService.expenses$, this.monthSubject]).pipe(
       map(([expenses, month]) =>
         expenses.filter((expense) => {
-          // const expenseDate = new Date(expense.date); //! Assuming expense.date is a string in ISO format
           const expenseDate = expense.date;
           return expenseDate.getMonth() === month && expenseDate.getFullYear() === this.currentYear;
         }),

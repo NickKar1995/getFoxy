@@ -24,11 +24,14 @@
         </div>
       </div>
       
-      <div class="expense-actions">
-        <button mat-icon-button color="warn" (click)="deleteExpense(expense.id)" aria-label="Delete expense">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
+      @if(shouldShowButton){
+        <div class="expense-actions">
+          <button mat-icon-button color="warn" (click)="deleteExpense(expense.id)" aria-label="Delete expense">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      }
+      
     </mat-card-content>
   </mat-card>
   

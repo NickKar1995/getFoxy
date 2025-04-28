@@ -1,0 +1,8 @@
+#expense-form {
+  display: flex;
+  flex-direction: column;
+  .form-actions {
+    display: flex;
+    justify-content: center;
+  }
+}
