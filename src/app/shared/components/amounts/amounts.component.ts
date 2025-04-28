@@ -2,6 +2,7 @@ import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
+import { Expense } from '../../../features/dashboard/models/Expense';
 
 @Component({
   selector: 'app-amounts',
@@ -13,4 +14,5 @@ import { Observable } from 'rxjs';
 export class AmountsComponent {
   @Input() todayTotal$!: Observable<number>;
   @Input() monthlyTotal$!: Observable<number>;
+  @Input() filteredExpenses$!: Observable<Expense[]>;
 }

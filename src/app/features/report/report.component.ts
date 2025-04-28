@@ -10,6 +10,7 @@ import { ChartComponent } from './chart/chart.component';
 import { ChartData } from 'chart.js';
 import { ExpenseComponent } from '../../shared/components/expense/expense.component';
 import { ExpenseService } from '../../core/services/expense/expense.service';
+import { AmountsComponent } from "../../shared/components/amounts/amounts.component";
 
 @Component({
   selector: 'app-report',
@@ -22,9 +23,9 @@ import { ExpenseService } from '../../core/services/expense/expense.service';
     MatOption,
     AsyncPipe,
     CurrencyPipe,
-
     ExpenseComponent,
-  ],
+    AmountsComponent
+],
   templateUrl: './report.component.html',
   styleUrl: './report.component.scss',
 })

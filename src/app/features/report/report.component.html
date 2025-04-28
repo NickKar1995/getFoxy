@@ -30,12 +30,13 @@
   </h3>
 
   <div class="total-section">
-    <div class="total-amount">{{ totalAmount$ | async | currency }}</div>
-    <div class="expense-count">{{ (filteredExpenses$ | async)?.length || 0 }} expense(s)</div>
+    <app-amounts
+      [monthlyTotal$]="totalAmount$"
+      [filteredExpenses$]="filteredExpenses$"
+    ></app-amounts>
   </div>
 </div>
 
-<!-- Expenses List -->
 <div class="expenses-list">
   @if ((filteredExpenses$ | async)?.length) {
     @for (expense of filteredExpenses$ | async; track expense.id) {
@@ -47,8 +48,6 @@
     </div>
   }
 </div>
-
-<!-- ? Chart-Area -->
 
 <section>
   <app-chart [top5ExpensesChartData$]="top5ExpensesChartData$"></app-chart>

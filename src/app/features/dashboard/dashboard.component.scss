@@ -1,3 +1,17 @@
 #expenses-section {
   padding: 1rem;
 }
+
+@media only screen and (min-width: 768px) {
+  #dashboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  #expense-form,
+  #expenses-section {
+    width: 45%;
+  }
+}

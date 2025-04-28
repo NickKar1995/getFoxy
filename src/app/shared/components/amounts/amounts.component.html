@@ -1,12 +1,23 @@
 <section id="summary-cards">
-  <mat-card appearance="outlined" class="summary-card-today">
-    <mat-card-content>
-      <div class="summary-title">Today's Total</div>
-      <div class="summary-amount">
-        <strong>{{ todayTotal$ | async | currency }}</strong>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  @if (todayTotal$ | async; as todayTotal) {
+    <mat-card appearance="outlined" class="summary-card-today">
+      <mat-card-content>
+        <div class="summary-title">Today's Total</div>
+        <div class="summary-amount">
+          <strong>{{ todayTotal | currency }}</strong>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card appearance="outlined" class="summary-card-today">
+      <mat-card-content>
+        <div class="summary-title">Expense(s)</div>
+        <div class="summary-amount">
+          <strong>{{ (filteredExpenses$ | async)?.length || 0 }}</strong>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
 
   <mat-card appearance="outlined" class="summary-card-monthly">
     <mat-card-content>

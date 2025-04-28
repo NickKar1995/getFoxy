@@ -1,4 +1,4 @@
-<mat-card appearance="outlined" class="expense-card">
+<mat-card appearance="raised" class="expense-card" [ngStyle]="{ 'border-left': '4px solid ' + getCategoryColor(expense.category) }" >
   <mat-card-content class="expense-content">
     <div class="expense-details">
       <div class="expense-secondary">

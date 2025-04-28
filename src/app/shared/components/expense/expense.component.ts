@@ -17,17 +17,16 @@ export class ExpenseComponent {
   @Input() shouldShowButton = true
   @Output() delete = new EventEmitter<string>();
 
-  // Category colors map
+  // * Category colors map
   private categoryColors: Record<string, string> = {
     food: '#FF9800', // Orange
     transport: '#2196F3', // Blue
     bills: '#F44336', // Red
     entertainment: '#9C27B0', // Purple
     other: '#607D8B', // Blue Gray
-    // Add more categories as needed
   };
 
-  // Category icons map
+  // * Category icons map
   private categoryIcons: Record<string, string> = {
     food: 'restaurant',
     transport: 'directions_car',
