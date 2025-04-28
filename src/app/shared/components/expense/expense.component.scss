@@ -1,70 +1,68 @@
 .expense-card {
-    margin-bottom: 1rem;
-    border-left: 4px solid #1976d2; // Accent color, can be dynamic based on category
-    
-    &:hover {
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-    }
+  margin-bottom: 1rem;
+  border-left: 4px solid #1976d2; // Accent color, can be dynamic based on category
+
+  &:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   }
-  
-  .expense-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
+}
+
+.expense-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.expense-details {
+  flex: 1;
+}
+
+.expense-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.title-date {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+  flex-wrap: wrap;
+}
+
+.expense-amount {
+  font-weight: 500;
+  color: #333;
+}
+
+.expense-secondary {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.category-chip {
+  display: flex;
+  align-items: center;
+  padding: 5px 4px;
+  border-radius: 8px;
+  font-size: 12px;
+  background-color: #e0e0e0;
+  color: rgba(0, 0, 0, 0.87);
+
+  .category-icon {
+    font-size: 22px;
+    height: 23px;
+    width: 24px;
   }
-  
-  .expense-details {
-    flex: 1;
-  }
-  
-  .expense-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  
-  .expense-description {
-    font-size: 16px;
-    font-weight: 500;
-  }
-  
-  .expense-amount {
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .expense-secondary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .category-chip {
-    display: flex;
-    align-items: center;
-    padding: 4px 8px;
-    border-radius: 16px;
-    font-size: 12px;
-    background-color: #e0e0e0;
-    color: rgba(0, 0, 0, 0.87);
-    
-    .category-icon {
-      font-size: 16px;
-      height: 16px;
-      width: 16px;
-      margin-right: 4px;
-    }
-  }
-  
-  .expense-date {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.54);
-  }
-  
-  .expense-actions {
-    display: flex;
-    align-items: center;
-  }
-  
+}
+
+.expense-date {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.expense-actions {
+  display: flex;
+  align-items: center;
+}

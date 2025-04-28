@@ -1,37 +1,34 @@
-<!-- <mat-card appearance="outlined">
-  <mat-card-content>Simple card</mat-card-content>
-</mat-card> -->
-
-
-
 <mat-card appearance="outlined" class="expense-card">
-    <mat-card-content class="expense-content">
-      <div class="expense-details">
-        <div class="expense-main">
-          <span class="expense-description">{{ expense.title }}</span>
-          <span class="expense-amount">{{ expense.amount | currency }}</span>
+  <mat-card-content class="expense-content">
+    <div class="expense-details">
+      <div class="expense-secondary">
+        <div
+          class="category-chip"
+          [ngStyle]="{ 'background-color': getCategoryColor(expense.category) }"
+        >
+          <mat-icon class="category-icon">
+            {{ getCategoryIcon(expense.category) }}
+          </mat-icon>
         </div>
-        
-        <div class="expense-secondary">
-          <div class="category-chip" [ngStyle]="{'background-color': getCategoryColor(expense.category)}">
-            <mat-icon  class="category-icon">
-              {{ getCategoryIcon(expense.category) }}
-            </mat-icon>
-            <span>{{ expense.category }}</span>
-          </div>
-          
-          <span class="expense-date">{{ expense.date | date }}</span>
+        <div class="title-date">
+          <span class="expense-title">{{ expense.title }}</span>
+          <span class="expense-date">{{ expense.date | date: 'shortDate' }}</span>
         </div>
       </div>
-      
-      @if(shouldShowButton){
-        <div class="expense-actions">
-          <button mat-icon-button color="warn" (click)="deleteExpense(expense.id)" aria-label="Delete expense">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      }
-      
-    </mat-card-content>
-  </mat-card>
-  
+    </div>
+    <span class="expense-amount">{{ expense.amount | currency }}</span>
+
+    @if (shouldShowButton) {
+      <div class="expense-actions">
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="deleteExpense(expense.id)"
+          aria-label="Delete expense"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>
