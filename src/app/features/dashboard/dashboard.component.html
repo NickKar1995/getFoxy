@@ -1,11 +1,23 @@
 <app-amounts [todayTotal$]="todayTotal$" [monthlyTotal$]="monthlyTotal$"></app-amounts>
-<section id="dashboard">
-  <section id="expense-form">
-    <app-form></app-form>
+@if (todayExpenses$ | async; as todayExpenses) {
+  <section
+    id="dashboard"
+    [ngClass]="{
+      'has-expenses': todayExpenses.length > 0,
+      'no-expenses': todayExpenses.length === 0,
+    }"
+  >
+    <section id="expense-form">
+      <app-form></app-form>
+    </section>
+    <section id="expenses-section">
+      @for (expense of todayExpenses; track expense.id) {
+        <app-expense
+          [@fadeInOut]
+          (delete)="onDeleteExpense($event)"
+          [expense]="expense"
+        ></app-expense>
+      }
+    </section>
   </section>
-  <section id="expenses-section">
-    @for (expense of todayExpenses$ | async; track expense.id) {
-      <app-expense (delete)="onDeleteExpense($event)" [expense]="expense"></app-expense>
-    }
-  </section>
-</section>
+}
