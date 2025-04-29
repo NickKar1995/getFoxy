@@ -8,7 +8,6 @@ import { StorageEnum } from '../../../features/dashboard/models/StorageEnum';
   providedIn: 'root',
 })
 export class ExpenseService {
-  private expenses: Expense[] = [];
   private expensesSubject = new BehaviorSubject<Expense[]>([]);
   expenses$ = this.expensesSubject.asObservable();
 
@@ -17,29 +16,31 @@ export class ExpenseService {
   }
 
   saveExpense(expense: Expense): void {
-    const newExpense: Expense = {
+    const now = new Date();
+    const newExp: Expense = {
       ...expense,
       id: this.generateId(),
-      date: new Date(),
+      date: now,
     };
-    this.expenses.push(newExpense);
-    this.expensesSubject.next(this.expenses);
+
+    const current = this.expensesSubject.getValue();
+    this.expensesSubject.next([...current, newExp]);
     this.saveToLocalStorage();
   }
 
   editExpense(expense: Expense, expenseId: string): void {
-    console.log(this.expenses);
-    const index = this.expenses.findIndex((expense) => expenseId === expense.id);
-    if (index !== -1) {
-      this.expenses[index] = { ...this.expenses[index], ...expense };
-      this.expensesSubject.next(this.expenses);
-      this.saveToLocalStorage();
-    }
+    const updated = this.expensesSubject.getValue().map((expenseFromSubj) => {
+      return expenseFromSubj.id === expenseId
+        ? { ...expenseFromSubj, ...expense }
+        : expenseFromSubj;
+    });
+    this.expensesSubject.next(updated);
+    this.saveToLocalStorage();
   }
 
   deleteExpense(id: string): void {
-    this.expenses = this.expenses.filter((expense) => expense.id !== id);
-    this.expensesSubject.next(this.expenses);
+    const expenses = this.expensesSubject.getValue().filter((expense) => expense.id !== id);
+    this.expensesSubject.next(expenses);
     this.saveToLocalStorage();
   }
 
@@ -97,7 +98,7 @@ export class ExpenseService {
   }
 
   private saveToLocalStorage(): void {
-    const expensesToSave = this.expenses.map((expense) => ({
+    const expensesToSave = this.expensesSubject.getValue().map((expense) => ({
       ...expense,
       date: expense.date instanceof Date ? expense.date.toISOString() : expense.date,
     }));
@@ -110,13 +111,12 @@ export class ExpenseService {
 
   private loadFromLocalStorage(): void {
     const data = localStorage.getItem(StorageEnum.EXPENSES);
-    if (data) {
-      const parsedExpenses: Expense[] = JSON.parse(data).map((expense: any) => ({
-        ...expense,
-        date: new Date(expense.date),
-      }));
-      this.expenses = parsedExpenses;
-      this.expensesSubject.next(this.expenses);
-    }
+    if (!data) return;
+    const parsedExpenses: Expense[] = JSON.parse(data).map((expense: any) => ({
+      ...expense,
+      date: new Date(expense.date),
+    }));
+
+    this.expensesSubject.next(parsedExpenses);
   }
 }
