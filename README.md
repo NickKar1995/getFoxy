@@ -23,6 +23,9 @@ Don't want to spin up the app locally? Check out the deployed version:
    - Fully adaptable layout that looks great on desktop, tablet, and mobile screens.
 5. **Toastr Notifications**
    - Instant feedback with elegant toast messages for success and error events.
+6. **Lazy loading**
+   - Performance issues? Not anymore, lazy loading lowers load time significantly.
+
 
 ## 📦 Getting Started
 
