@@ -1,4 +1,8 @@
 <app-toolbar></app-toolbar>
 <div class="home">
-  <router-outlet></router-outlet>
+  @if (loadingRouteConfig) {
+    <app-loading-spinner></app-loading-spinner>
+  } @else {
+    <router-outlet></router-outlet>
+  }
 </div>
