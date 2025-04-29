@@ -1,4 +1,5 @@
-# GetFoxy
+# GetFoxy 
+<p align="center"><a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=gitlab" /></a></p>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
 
@@ -36,7 +37,7 @@ Don't want to spin up the app locally? Check out the deployed version:
    ```
 3. **Run the development server**
    ```bash
-   ng serve --open
+   ng serve 
    ```
 4. **Build for production**
    ```bash
