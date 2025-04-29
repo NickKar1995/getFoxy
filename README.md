@@ -1,27 +1,68 @@
-# GetFoxy
+# GetFoxy 
+<p align="center"><a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=gitlab" /></a></p>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
 
-## Development server
+# Got a problem with your monthly/daily expenses? Not anymore, getFoxy has you covered
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+A user-friendly, high-performance Angular application designed to help you track and manage your expenses with ease.
 
-## Code scaffolding
+## 🚀 Live Demo
+Don't want to spin up the app locally? Check out the deployed version:
+[https://getfoxyexpensegreece.netlify.app/dashboard](https://getfoxyexpensegreece.netlify.app/dashboard)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 📋 Key Features
 
-## Build
+1. **RxJS Reactive Patterns**
+   - Leveraging powerful Observables and operators to manage state and handle asynchronous streams in a clean, declarative way.
+2. **Solid Project Architecture**
+   - Organized into **Core**, **Shared**, and **Features** modules for maximum scalability and maintainability.
+3. **Angular Animations**
+   - Smooth entry and exit transitions to delight users when adding or removing expenses.
+4. **Responsive Design**
+   - Fully adaptable layout that looks great on desktop, tablet, and mobile screens.
+5. **Toastr Notifications**
+   - Instant feedback with elegant toast messages for success and error events.
+6. **Lazy loading**
+   - Performance issues? Not anymore, lazy loading lowers load time significantly.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## 📦 Getting Started
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/getfoxy-expenses.git
+   cd getfoxy-expenses
+   ```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+3. **Run the development server**
+   ```bash
+   ng serve 
+   ```
+4. **Build for production**
+   ```bash
+   ng build --configuration production
+   ```
 
-## Running end-to-end tests
+## 🏗️ Project Structure
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+/src
+├── app
+│   ├── core/           # Singletons, services, interceptors
+│   ├── shared/         # Reusable components, pipes, directives
+│   └── features/       # Feature modules (dashboard, expenses, auth)
+└── assets/
+```
 
-## Further help
+## 🤝 Contributing
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Feel free to open issues or submit pull requests. Contributions are always welcome!
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
