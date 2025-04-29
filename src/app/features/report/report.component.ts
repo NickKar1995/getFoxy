@@ -134,7 +134,7 @@ export class ReportComponent implements OnInit {
 
   getSelectedMonthName(): string {
     const selectedMonthObj = this.months.find((month) => month.value === this.selectedMonth);
-    return selectedMonthObj ? selectedMonthObj.viewValue : ''; // No case that it won't be found
+    return selectedMonthObj ? selectedMonthObj.viewValue : ''; 
   }
 
   onMonthChange(month: number): void {

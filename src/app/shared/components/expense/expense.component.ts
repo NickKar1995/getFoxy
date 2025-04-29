@@ -4,6 +4,8 @@ import { Expense } from '../../../features/dashboard/models/Expense';
 import { CurrencyPipe, DatePipe, NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { categoryColors } from './models/CategoryColors';
+import { categoryIcons, ExpenseCategory } from './models/CategoryIcons';
 
 @Component({
   selector: 'app-expense',
@@ -14,33 +16,17 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ExpenseComponent {
   @Input() expense!: Expense;
-  @Input() shouldShowButton = true
+  @Input() shouldShowButton = true;
   @Output() delete = new EventEmitter<string>();
+  private categoryColors = categoryColors;
+  private categoryIcons = categoryIcons;
 
-  // * Category colors map
-  private categoryColors: Record<string, string> = {
-    food: '#FF9800', // Orange
-    transport: '#2196F3', // Blue
-    bills: '#F44336', // Red
-    entertainment: '#9C27B0', // Purple
-    other: '#607D8B', // Blue Gray
-  };
-
-  // * Category icons map
-  private categoryIcons: Record<string, string> = {
-    food: 'restaurant',
-    transport: 'directions_car',
-    bills: 'home',
-    entertainment: 'videocam',
-    other: 'other_admission',
-  };
-
-  getCategoryColor(category: string): string {
-    return this.categoryColors[category.toLowerCase()] || '#e0e0e0';
+  getCategoryColor(category: ExpenseCategory): string {
+    return this.categoryColors[category] || '#e0e0e0';
   }
 
-  getCategoryIcon(category: string): string {
-    return this.categoryIcons[category.toLowerCase()] || '';
+  getCategoryIcon(category: ExpenseCategory): string {
+    return this.categoryIcons[category] || '';
   }
 
   deleteExpense(id: string): void {

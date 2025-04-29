@@ -1,4 +1,3 @@
-// models/expense-categories.ts
 export interface CategoryOption {
   value: string;
   viewValue: string;
@@ -6,7 +5,6 @@ export interface CategoryOption {
 }
 
 export const EXPENSE_CATEGORIES: CategoryOption[] = [
-  // ? Dont forge to check for the icons dude
   { value: 'food', viewValue: 'Food', icon: 'restaurant' },
   { value: 'transport', viewValue: 'Transport', icon: 'directions_car' },
   { value: 'bills', viewValue: 'Bills', icon: 'receipt' },

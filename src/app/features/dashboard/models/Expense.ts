@@ -1,7 +1,9 @@
+import { ExpenseCategory } from "../../../shared/components/expense/models/CategoryIcons";
+
 export type Expense = {
   id: string;
   title: string;
   amount: number;
-  category: string;
+  category: ExpenseCategory;
   date: Date;
 };
