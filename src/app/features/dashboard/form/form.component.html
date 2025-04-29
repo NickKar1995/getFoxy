@@ -1,5 +1,9 @@
 <mat-card appearance="outlined">
-  <mat-card-header> <span>Add expense</span></mat-card-header>
+  <mat-card-header>
+    <span [ngClass]="data ? 'edit-expense' : 'add-expense'">{{
+      data ? 'Edit Expense' : 'Add expense'
+    }}</span></mat-card-header
+  >
   <mat-card-content>
     <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()" id="expense-form">
       <mat-form-field appearance="fill">
@@ -12,7 +16,7 @@
 
       <mat-form-field class="amount-field" appearance="fill">
         <mat-label>Amount</mat-label>
-        <input matInput formControlName="amount" />
+        <input type="number" matInput formControlName="amount" />
         @if (
           expenseForm.get('amount')?.hasError('required') && expenseForm.get('amount')?.touched
         ) {
@@ -36,7 +40,9 @@
       </mat-form-field>
 
       <div class="form-actions">
-        <button mat-raised-button color="primary" type="submit">Add Expense</button>
+        <button mat-raised-button color="primary" type="submit">
+          {{ data ? 'Edit Expense' : 'Add expense' }}
+        </button>
       </div>
     </form>
   </mat-card-content>

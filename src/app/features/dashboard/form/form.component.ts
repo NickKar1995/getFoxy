@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, Input, OnInit, Optional } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,10 @@ import { MatButton } from '@angular/material/button';
 import { EXPENSE_CATEGORIES } from '../models/Categories';
 import { ExpenseService } from '../../../core/services/expense/expense.service';
 import { NotificationService } from '../../../core/services/notification/notification.service';
+import { Expense } from '../models/Expense';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NgClass } from '@angular/common';
+
 @Component({
   selector: 'app-form',
   standalone: true,
@@ -21,6 +25,7 @@ import { NotificationService } from '../../../core/services/notification/notific
     MatDatepickerModule,
     ReactiveFormsModule,
     MatButton,
+    NgClass,
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './form.component.html',
@@ -30,12 +35,24 @@ export class FormComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   private readonly expenseService = inject(ExpenseService);
   private readonly notificationService = inject(NotificationService);
+  @Input() data?: Expense;
 
+  constructor(
+    @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: Expense | null,
+    @Optional() @Inject(MatDialogRef) private dialogRef: any,
+  ) {
+    if (dialogData) {
+      this.data = dialogData;
+    }
+  }
   expenseForm!: FormGroup;
   categories = EXPENSE_CATEGORIES;
 
   ngOnInit(): void {
     this.initForm();
+    if (this.data) {
+      this.expenseForm.patchValue(this.data);
+    }
   }
 
   private initForm(): void {
@@ -47,13 +64,20 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.expenseForm.valid) {
+    if (!this.expenseForm.valid) {
+      this.expenseForm.markAllAsTouched();
+      return;
+    }
+    if (this.data) {
+      this.expenseService.editExpense(this.expenseForm.value, this.data.id);
+      const messageObject = this.notificationService.createSuccessNotificationObj(false, true);
+      this.notificationService.success(messageObject);
+      this.dialogRef.close();
+    } else {
       this.expenseService.saveExpense(this.expenseForm.value);
       const messageObject = this.notificationService.createSuccessNotificationObj();
       this.notificationService.success(messageObject);
       this.expenseForm.reset();
-    } else {
-      this.expenseForm.markAllAsTouched();
     }
   }
 }

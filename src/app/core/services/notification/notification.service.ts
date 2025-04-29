@@ -8,10 +8,18 @@ import { MessageObject } from '../../models/MessageObject';
 export class NotificationService {
   private toastrService = inject(ToastrService);
 
-  createSuccessNotificationObj(isDeleteMessage = false): MessageObject {
+  createSuccessNotificationObj(isDeleteMessage = false, isEditMessage = false): MessageObject {
+    let message = 'Expense added successfully!';
+
+    if (isDeleteMessage) {
+      message = 'Expense deleted successfully!';
+    } else if (isEditMessage) {
+      message = 'Expense edited successfully!';
+    }
+
     return {
       title: 'Success',
-      message: isDeleteMessage ? 'Expense deleted successfully!' : 'Expense added successfully!',
+      message,
     };
   }
 

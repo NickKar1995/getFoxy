@@ -27,6 +27,16 @@ export class ExpenseService {
     this.saveToLocalStorage();
   }
 
+  editExpense(expense: Expense, expenseId: string): void {
+    console.log(this.expenses);
+    const index = this.expenses.findIndex((expense) => expenseId === expense.id);
+    if (index !== -1) {
+      this.expenses[index] = { ...this.expenses[index], ...expense };
+      this.expensesSubject.next(this.expenses);
+      this.saveToLocalStorage();
+    }
+  }
+
   deleteExpense(id: string): void {
     this.expenses = this.expenses.filter((expense) => expense.id !== id);
     this.expensesSubject.next(this.expenses);
@@ -64,7 +74,7 @@ export class ExpenseService {
       }),
     );
   }
-  
+
   getMonthlyTotal$(): Observable<number> {
     return this.expenses$.pipe(
       map((expenses) => {
@@ -80,6 +90,10 @@ export class ExpenseService {
           .reduce((sum, expense) => sum + Number(expense.amount), 0);
       }),
     );
+  }
+
+  getSpecificExpense$(id: string): Observable<Expense | undefined> {
+    return this.expenses$.pipe(map((expenses) => expenses.find((expense) => expense.id === id)));
   }
 
   private saveToLocalStorage(): void {

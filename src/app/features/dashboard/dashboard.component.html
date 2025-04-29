@@ -15,6 +15,7 @@
         <app-expense
           [@fadeInOut]
           (delete)="onDeleteExpense($event)"
+          (edit)="onEditExpense($event)"
           [expense]="expense"
         ></app-expense>
       }

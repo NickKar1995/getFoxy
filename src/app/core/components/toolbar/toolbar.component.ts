@@ -12,5 +12,4 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './toolbar.component.scss',
 })
 export class ToolbarComponent {
-  tick = 'ds';
 }

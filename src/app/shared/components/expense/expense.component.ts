@@ -18,6 +18,8 @@ export class ExpenseComponent {
   @Input() expense!: Expense;
   @Input() shouldShowButton = true;
   @Output() delete = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<string>();
+
   private categoryColors = categoryColors;
   private categoryIcons = categoryIcons;
 
@@ -31,5 +33,9 @@ export class ExpenseComponent {
 
   deleteExpense(id: string): void {
     this.delete.emit(id);
+  }
+
+  editExpense(id: string) {
+    this.edit.emit(id);
   }
 }

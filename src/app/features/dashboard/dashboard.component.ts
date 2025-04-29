@@ -6,11 +6,13 @@ import { AmountsComponent } from '../../shared/components/amounts/amounts.compon
 import { ExpenseService } from '../../core/services/expense/expense.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { NotificationService } from '../../core/services/notification/notification.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgClass, FormComponent, ExpenseComponent, AsyncPipe, AmountsComponent],
+  imports: [NgClass, FormComponent, ExpenseComponent, AsyncPipe, AmountsComponent, MatDialogModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   animations: [
@@ -28,6 +30,7 @@ import { NotificationService } from '../../core/services/notification/notificati
 export class DashboardComponent {
   private readonly expenseService = inject(ExpenseService);
   private readonly notificationService = inject(NotificationService);
+  readonly dialog = inject(MatDialog);
   todayExpenses$ = this.expenseService.getTodayExpenses$();
   todayTotal$ = this.expenseService.getTodayTotal$();
   monthlyTotal$ = this.expenseService.getMonthlyTotal$();
@@ -36,5 +39,14 @@ export class DashboardComponent {
     this.expenseService.deleteExpense($event);
     const messageObject = this.notificationService.createSuccessNotificationObj(true);
     this.notificationService.success(messageObject);
+  }
+
+  onEditExpense($event: string) {
+    this.expenseService
+      .getSpecificExpense$($event)
+      .pipe(take(1))
+      .subscribe((expense) => {
+        this.dialog.open(FormComponent, { data: expense });
+      });
   }
 }
