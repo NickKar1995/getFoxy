@@ -4,13 +4,14 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MONTHS_EN } from './models/Months';
 import { Expense } from '../dashboard/models/Expense';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
-import { AsyncPipe, CurrencyPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DayOption } from './models/DayOption';
 import { ChartComponent } from './chart/chart.component';
 import { ChartData } from 'chart.js';
 import { ExpenseComponent } from '../../shared/components/expense/expense.component';
 import { ExpenseService } from '../../core/services/expense/expense.service';
-import { AmountsComponent } from "../../shared/components/amounts/amounts.component";
+import { AmountsComponent } from '../../shared/components/amounts/amounts.component';
+import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-report',
@@ -22,10 +23,11 @@ import { AmountsComponent } from "../../shared/components/amounts/amounts.compon
     MatSelect,
     MatOption,
     AsyncPipe,
-    CurrencyPipe,
+
     ExpenseComponent,
-    AmountsComponent
-],
+    AmountsComponent,
+    EmptyStateComponent,
+  ],
   templateUrl: './report.component.html',
   styleUrl: './report.component.scss',
 })
@@ -134,7 +136,7 @@ export class ReportComponent implements OnInit {
 
   getSelectedMonthName(): string {
     const selectedMonthObj = this.months.find((month) => month.value === this.selectedMonth);
-    return selectedMonthObj ? selectedMonthObj.viewValue : ''; 
+    return selectedMonthObj ? selectedMonthObj.viewValue : '';
   }
 
   onMonthChange(month: number): void {

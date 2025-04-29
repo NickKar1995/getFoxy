@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormComponent } from './form/form.component';
 import { ExpenseComponent } from '../../shared/components/expense/expense.component';
-import { AsyncPipe, JsonPipe, NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { AmountsComponent } from '../../shared/components/amounts/amounts.component';
 import { ExpenseService } from '../../core/services/expense/expense.service';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -10,7 +10,7 @@ import { NotificationService } from '../../core/services/notification/notificati
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [JsonPipe,NgClass,FormComponent, ExpenseComponent, AsyncPipe, AmountsComponent],
+  imports: [NgClass, FormComponent, ExpenseComponent, AsyncPipe, AmountsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   animations: [
