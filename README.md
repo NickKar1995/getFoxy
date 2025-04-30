@@ -11,6 +11,17 @@ A user-friendly, high-performance Angular application designed to help you track
 Don't want to spin up the app locally? Check out the deployed version:
 [https://getfoxyexpensegreece.netlify.app/dashboard](https://getfoxyexpensegreece.netlify.app/dashboard)
 
+## 🐳 Fun of Docker  
+The app already has an image ready for a spin up!  
+
+### 🧪 Run with Docker
+1. **Pull the image**
+   ```bash
+   docker pull testdocker95/getfoxy
+2. **Run the container**
+   ```bash
+   cd getFoxy
+   docker compose up
 ## 📋 Key Features
 
 1. **RxJS Reactive Patterns**
