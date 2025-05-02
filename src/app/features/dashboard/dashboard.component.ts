@@ -22,7 +22,7 @@ import { take } from 'rxjs';
         animate('700ms ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
       ]),
       transition(':leave', [
-        animate('600ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' })),
+        animate('100ms ease-in', style({ opacity: 0, transform: 'translateY(-20px)' })),
       ]),
     ]),
   ],
