@@ -27,7 +27,7 @@ import { take } from 'rxjs';
       ]),
     ]),
   ],
-})
+}) 
 export class DashboardComponent {
   private readonly expenseService = inject(ExpenseService);
   private readonly notificationService = inject(NotificationService);
