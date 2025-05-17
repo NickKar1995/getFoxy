@@ -1,20 +1,17 @@
 #expense-form {
   display: flex;
   flex-direction: column;
+
   .form-actions {
     display: flex;
     justify-content: center;
   }
+  .register-login-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 }
-
-.edit-expense {
-  background-color: var(--edit-color);
-}
-
-.add-expense {
-  background-color: var(--add-color);
-}
-
 mat-card-header {
   font-weight: bold;
   padding: 0px;
@@ -26,6 +23,7 @@ mat-card-header {
   min-width: 200px;
   padding-left: 1rem;
   span {
+    background-color: var(--add-color);
     width: 100%;
     height: 60%;
     color: white;

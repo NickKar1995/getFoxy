@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormComponent } from './form/form.component';
 import { ExpenseComponent } from '../../shared/components/expense/expense.component';
 import { AsyncPipe, NgClass } from '@angular/common';
@@ -9,13 +9,13 @@ import { NotificationService } from '../../core/services/notification/notificati
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { take } from 'rxjs';
 
-
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [NgClass, FormComponent, ExpenseComponent, AsyncPipe, AmountsComponent, MatDialogModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -28,17 +28,27 @@ import { take } from 'rxjs';
     ]),
   ],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   private readonly expenseService = inject(ExpenseService);
   private readonly notificationService = inject(NotificationService);
+
   readonly dialog = inject(MatDialog);
   todayExpenses$ = this.expenseService.getTodayExpenses$();
   todayTotal$ = this.expenseService.getTodayTotal$();
   monthlyTotal$ = this.expenseService.getMonthlyTotal$();
 
+  ngOnInit() {
+    this.expenseService.getExpenses().subscribe((res) => {
+      console.log('esiiii', res);
+    });
+  }
+
   onDeleteExpense($event: string) {
     this.expenseService.deleteExpense($event);
-    const messageObject = this.notificationService.createSuccessNotificationObj(true);
+    const messageObject = this.notificationService.createSuccessNotificationObj(
+      'Success',
+      'Deleted!',
+    );
     this.notificationService.success(messageObject);
   }
 
