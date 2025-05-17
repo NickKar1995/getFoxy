@@ -9,6 +9,9 @@
   <span class="spacer"></span>
 
   <section class="monthly-search-area">
-    <button mat-button routerLink="/report">Monthly</button>
+    <button mat-button appAuth [showWhenAuthenticated]="false" (click)="initiateLogin()">Login</button>
+    <button mat-button appAuth [showWhenAuthenticated]="true" (click)="initiateLogout()">Logout</button>
+    <button appAuth 
+    mat-button routerLink="/report">Monthly</button>
   </section>
 </mat-toolbar>

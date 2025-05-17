@@ -3,6 +3,7 @@ import { RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterOutlet } from '
 import { ToolbarComponent } from './core/components/toolbar/toolbar.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner/loading-spinner.component';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',

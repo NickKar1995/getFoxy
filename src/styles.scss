@@ -1,13 +1,26 @@
 @use '@angular/material' as mat;
 @import 'ngx-toastr/toastr';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
 :root {
-  @include mat.toolbar-overrides((
-    container-background-color: #ee7020, 
-    container-text-color: white,         
-  ));
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: #ee7020,
+      container-text-color: white,
+    )
+  );
+  --edit-color: #ee7020;
+  --add-color: #004467;
+}
+
+.login-modal {
+  width: 30%;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
