@@ -3,7 +3,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -22,7 +21,6 @@ import { NgClass } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatDatepickerModule,
     ReactiveFormsModule,
     MatButton,
     NgClass,
@@ -41,7 +39,7 @@ export class FormComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: Expense | null,
     @Optional() @Inject(MatDialogRef) private dialogRef: any,
   ) {
-    if (dialogData) {
+    if (dialogData && 'title' in dialogData) {
       this.data = dialogData;
     }
   }
@@ -70,12 +68,18 @@ export class FormComponent implements OnInit {
     }
     if (this.data) {
       this.expenseService.editExpense(this.expenseForm.value, this.data.id);
-      const messageObject = this.notificationService.createSuccessNotificationObj(false, true);
+      const messageObject = this.notificationService.createSuccessNotificationObj(
+        'Success',
+        'Data edited!',
+      );
       this.notificationService.success(messageObject);
       this.dialogRef.close();
     } else {
       this.expenseService.saveExpense(this.expenseForm.value);
-      const messageObject = this.notificationService.createSuccessNotificationObj();
+      const messageObject = this.notificationService.createSuccessNotificationObj(
+        'Success',
+        'Data saved!',
+      );
       this.notificationService.success(messageObject);
       this.expenseForm.reset();
     }

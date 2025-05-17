@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Expense } from '../../../features/dashboard/models/Expense';
 import { CurrencyPipe, DatePipe, NgStyle } from '@angular/common';
@@ -13,6 +13,7 @@ import { categoryIcons, ExpenseCategory } from './models/CategoryIcons';
   imports: [MatCardModule, CurrencyPipe, MatIconModule, NgStyle, DatePipe, MatButtonModule],
   templateUrl: './expense.component.html',
   styleUrl: './expense.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExpenseComponent {
   @Input() expense!: Expense;

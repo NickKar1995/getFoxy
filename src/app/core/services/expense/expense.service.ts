@@ -1,18 +1,27 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { map, Observable } from 'rxjs';
 import { Expense } from '../../../features/dashboard/models/Expense';
 import { StorageEnum } from '../../../features/dashboard/models/StorageEnum';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from '../../../tokens/token';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExpenseService {
+  private readonly httpService = inject(HttpClient);
+  private readonly apiUrl = inject(API_URL);
   private expensesSubject = new BehaviorSubject<Expense[]>([]);
   expenses$ = this.expensesSubject.asObservable();
 
   constructor() {
     this.loadFromLocalStorage();
+  }
+
+  getExpenses() {
+    console.log('APIURL', this.apiUrl);
+    return this.httpService.get(`${this.apiUrl}/expense/v1/`);
   }
 
   saveExpense(expense: Expense): void {

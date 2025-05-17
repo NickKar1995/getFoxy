@@ -15,13 +15,7 @@ import { ChartData } from 'chart.js';
   styleUrl: './chart.component.scss',
 })
 export class ChartComponent {
-  @Input()   top5ExpensesChartData$!: Observable<ChartData<'bar', number[], string> | null>;
-
-
-  barChartData = {
-    labels: ['January', 'February', 'March'],
-    datasets: [{ data: [65, 59, 80], label: 'Sales' }],
-  };
+  @Input() top5ExpensesChartData$!: Observable<ChartData<'bar', number[], string> | null>;
 
   barChartOptions = {
     responsive: true,
