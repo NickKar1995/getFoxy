@@ -6,11 +6,10 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
 import { provideHttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, ToolbarComponent, MatProgressSpinnerModule, LoadingSpinnerComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [RouterOutlet, ToolbarComponent, MatProgressSpinnerModule, LoadingSpinnerComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   loadingRouteConfig = false;

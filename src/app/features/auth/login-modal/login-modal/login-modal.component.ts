@@ -10,19 +10,18 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
-  selector: 'app-login-modal',
-  standalone: true,
-  imports: [
-    MatSlideToggleModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButton,
-  ],
-  templateUrl: './login-modal.component.html',
-  styleUrl: './login-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-login-modal',
+    imports: [
+        MatSlideToggleModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButton,
+    ],
+    templateUrl: './login-modal.component.html',
+    styleUrl: './login-modal.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginModalComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);

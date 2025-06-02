@@ -7,12 +7,11 @@ import { AsyncPipe } from '@angular/common';
 import { ChartData } from 'chart.js';
 
 @Component({
-  selector: 'app-chart',
-  standalone: true,
-  imports: [BaseChartDirective, AsyncPipe],
-  providers: [provideCharts(withDefaultRegisterables())],
-  templateUrl: './chart.component.html',
-  styleUrl: './chart.component.scss',
+    selector: 'app-chart',
+    imports: [BaseChartDirective, AsyncPipe],
+    providers: [provideCharts(withDefaultRegisterables())],
+    templateUrl: './chart.component.html',
+    styleUrl: './chart.component.scss'
 })
 export class ChartComponent {
   @Input() top5ExpensesChartData$!: Observable<ChartData<'bar', number[], string> | null>;

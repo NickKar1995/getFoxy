@@ -14,20 +14,19 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-form',
-  standalone: true,
-  imports: [
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatButton,
-    NgClass,
-  ],
-  providers: [provideNativeDateAdapter()],
-  templateUrl: './form.component.html',
-  styleUrl: './form.component.scss',
+    selector: 'app-form',
+    imports: [
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatButton,
+        NgClass,
+    ],
+    providers: [provideNativeDateAdapter()],
+    templateUrl: './form.component.html',
+    styleUrl: './form.component.scss'
 })
 export class FormComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);

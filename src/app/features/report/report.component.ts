@@ -14,22 +14,20 @@ import { AmountsComponent } from '../../shared/components/amounts/amounts.compon
 import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state/empty-state.component';
 
 @Component({
-  selector: 'app-report',
-  standalone: true,
-  imports: [
-    ChartComponent,
-    MatFormField,
-    MatLabel,
-    MatSelect,
-    MatOption,
-    AsyncPipe,
-
-    ExpenseComponent,
-    AmountsComponent,
-    EmptyStateComponent,
-  ],
-  templateUrl: './report.component.html',
-  styleUrl: './report.component.scss',
+    selector: 'app-report',
+    imports: [
+        ChartComponent,
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        MatOption,
+        AsyncPipe,
+        ExpenseComponent,
+        AmountsComponent,
+        EmptyStateComponent,
+    ],
+    templateUrl: './report.component.html',
+    styleUrl: './report.component.scss'
 })
 export class ReportComponent implements OnInit {
   months = MONTHS_EN;

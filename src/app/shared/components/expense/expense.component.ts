@@ -8,12 +8,11 @@ import { categoryColors } from './models/CategoryColors';
 import { categoryIcons, ExpenseCategory } from './models/CategoryIcons';
 
 @Component({
-  selector: 'app-expense',
-  standalone: true,
-  imports: [MatCardModule, CurrencyPipe, MatIconModule, NgStyle, DatePipe, MatButtonModule],
-  templateUrl: './expense.component.html',
-  styleUrl: './expense.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-expense',
+    imports: [MatCardModule, CurrencyPipe, MatIconModule, NgStyle, DatePipe, MatButtonModule],
+    templateUrl: './expense.component.html',
+    styleUrl: './expense.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpenseComponent {
   @Input() expense!: Expense;

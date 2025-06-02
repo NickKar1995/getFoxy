@@ -10,12 +10,11 @@ import { AuthDirective } from '../../auth/directives/auth.directive';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
-  selector: 'app-toolbar',
-  standalone: true,
-  imports: [AuthDirective, MatToolbarModule, MatButtonModule, RouterLink, MatIconModule],
-  templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-toolbar',
+    imports: [AuthDirective, MatToolbarModule, MatButtonModule, RouterLink, MatIconModule],
+    templateUrl: './toolbar.component.html',
+    styleUrl: './toolbar.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent {
   private readonly dialogService = inject(DialogService);
